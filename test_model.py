@@ -6,6 +6,9 @@ from unittest.mock import patch
 import streamlit
 
 def test_age_transform():
+    '''
+    Method used to test the age trasnform function
+    '''
     assert m.age_tranform(56) == '55-59'
     assert m.age_tranform(81) == '80 or older'
     assert m.age_tranform(67) == '65-69'
@@ -36,6 +39,9 @@ def test_model(HeartDisease, BMI, Smoking, AlcoholDrinking, Stroke, \
                             DiffWalking, Sex, AgeCategory, Race, Diabetic, \
                             PhysicalActivity, GenHealth, SleepTime, Asthma, \
                             KidneyDisease, SkinCancer):
+    '''
+    Method used to test the functions in model
+    '''
     user_data = {
                 "HeartDisease":HeartDisease,
                 "BMI":BMI,
@@ -60,21 +66,33 @@ def test_model(HeartDisease, BMI, Smoking, AlcoholDrinking, Stroke, \
 
 @patch('streamlit.audio')
 def test_audio(placeholder):
+    '''
+    Function used to test the audio function
+    '''
     f.audio('audio/speech_1.mp3')
     f.audio('audio/speech_2.mp3')
 
 
 @patch('streamlit.sidebar')
 def test_sidebar(placeholder):
+    '''
+    Function used to test the sidebar function
+    '''
     toc = f.Toc()
     f.sidebar(toc)
 
 @patch('streamlit.write')
 def test_line_plot_2(placeholder):
+    '''
+    Function used to test the plotting of line function
+    '''
     f.line_plot_2()
 
 @patch('streamlit.plotly_chart')
 def test_bar2(placeholder):
+    '''
+    Function used to test plotting the bar function
+    '''
     f.bar2()
 
 '''
