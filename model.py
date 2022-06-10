@@ -18,6 +18,7 @@ def model(user_data):
     :return: The score of possible heart disease.
     """
 
+    assert isinstance(user_data, pd.DataFrame)
     # pre-processing
     user_data = pd.Series(user_data, index=["HeartDisease", "BMI", "Smoking",
                                             "AlcoholDrinking",
@@ -88,7 +89,7 @@ def age_tranform(age):
     :return: String interval
     """
 
-
+    assert isinstance(age, float) or isinstance(age, int)
     age = int(age)
     if age >= 55 and age <= 59:
         age = '55-59'
