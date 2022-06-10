@@ -1,3 +1,5 @@
+from xmlrpc.client import Boolean
+from numpy import isin
 import streamlit as st
 import plotly.express as px
 import pandas as pd
@@ -15,27 +17,36 @@ class Toc:
 
     def __init__(self):
         """
-        Initialize function.
+        Initialize function, it is used to intialize class fields
         """
         self._items = []
         self._placeholder = None
     
     def title(self, text):
         """
+        This function is used to display the title
         :param text: The text for the title.
         """
+
+        assert isinstance(text, str)
         self._markdown(text, "h1")
 
     def header(self, text):
         """
+        This function is used to display the header.
         :param text: The text for the header.
         """
+
+        assert isinstance(text, str)
         self._markdown(text, "h2", " " * 2)
 
     def subheader(self, text):
         """
+        This function is used to display the subheader.
         :param text: The text for the subheader.
         """
+
+        assert isinstance(text, str)
         self._markdown(text, "h3", " " * 4)
 
     def placeholder(self, sidebar=False):
@@ -43,18 +54,28 @@ class Toc:
         :param sidebar: If sidebar = False, no side bar in Table of Contents. If sidebar = True, adds empty sidebar
         to Table of Contents, temporarily.
         """
+
+        assert isinstance(sidebar, Boolean)
         self._placeholder = st.sidebar.empty() if sidebar else st.empty()
 
     def generate(self):
+        """
+        This function is used to place placeholders for inputs if required
+        """
         if self._placeholder:
             self._placeholder.markdown("\n".join(self._items), unsafe_allow_html=True)
     
     def _markdown(self, text, level, space=""):
         """
-        :param text:
-        :param level:
-        :param space:
+        This function is used to display items of markdown
+        :param text: The text for the markdown
+        :param level: The level in the markdown
+        :param space: The spacing before text in markdown
         """
+
+        assert isinstance(text, str)
+        assert isinstance(level, str)
+        assert isinstance(space, str)
         key = re.sub('[^0-9a-zA-Z]+', '-', text).lower()
 
         st.markdown(f"<{level} id='{key}'>{text}</{level}>", unsafe_allow_html=True)
@@ -62,8 +83,11 @@ class Toc:
 
 def sidebar(toc):
     """
+    This function is used to display the sidebar
     :param toc: The TOC class.
     """
+
+    assert isinstance(toc, Toc)
     with st.sidebar:
         st.title('Table of Contents')
         
@@ -74,6 +98,8 @@ def audio(file_name):
     :param file_name: The file path for the audio. This function will automatically embed the audio widget where every, you
     call it in the source file.
     """
+
+    assert isinstance(file_name, str)
     audio_file_1 = open(file_name, 'rb')
     audio_1 = audio_file_1.read()
     st.audio(audio_1, format='audio/mp3')
@@ -194,6 +220,9 @@ def progress_bar(color, value):
     :param color: The color of the progress bar.
     :param value: The value set for the progress bar.
     """
+
+    assert isinstance(color, str)
+    assert isinstance(value, float)
     st.markdown(
     """
     <style>
